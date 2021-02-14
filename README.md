@@ -13,7 +13,7 @@
 
 
 ## 脚本说明
-#### OS Batch/Script来帮助安装/运行modpack的服务器。适用于Windows和Linux（Bash）. 
+#### 通过Batch/Script来安装/运行modpack服务器，适用于Windows和Linux（Bash）. 
    这些脚本将获取适当的Forge安装程序并进行安装它，这也将安装Mojang的发行版的Minecraft二进制文件和所需的库。
 
    在安装了Forge/Minecraft之后，同一个脚本将作为启动器来启动服务器，同时还具有崩溃后自动重启的功能。不需要单独的脚本）
