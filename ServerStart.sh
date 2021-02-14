@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #### Minecraft-Forge Server install/launcher script
-#### Linux Version
+#### Linux 版本
 ####
 #### Created by: Dijkstra
 #### Mascot: Ordinator

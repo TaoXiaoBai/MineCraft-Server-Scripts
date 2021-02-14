@@ -1,13 +1,9 @@
-# Modpack ServerStart Scripts
+# Modpack 服务器启动脚本
 
-   Minecraft-Forge Server install/launcher script
+   只是一个Minecraft-Forge 服务器安装/启动脚本
+   （Readme修改中）
 
-   Created and supported by the All The Mods Team with special thanks to @OrdinatorStouff and @Dijkstra  
 
-   GitHub: https://github.com/AllTheMods/Server-Scripts          
-   AllTheMods Discord: https://discord.gg/FdFDVWb      
-
-   Originally created for use in "All The Mods" modpacks, but is **free for anyone to use, modify or distribute** provided the conditions of the custom license (detailed below) are met.
 
 <br>
 
@@ -16,17 +12,15 @@
 <br>
 
 
-## Description
-#### OS Batch/Script to help install/run modpack servers. Available for Windows and Linux (Bash). 
+## 脚本说明
+#### OS Batch/Script来帮助安装/运行modpack的服务器。适用于Windows和Linux（Bash）. 
+   这些脚本将获取适当的Forge安装程序并进行安装它，这也将安装Mojang的发行版的Minecraft二进制文件和所需的库。
 
-   These scripts will fetch the appropriate Forge installer and install it. This will also install Mojang's distribution-restricted Minecraft binary and the required libraries.
+   在安装了Forge/Minecraft之后，同一个脚本将作为启动器来启动服务器，同时还具有崩溃后自动重启的功能。不需要单独的脚本）
+   它还能适应平稳过渡到新版本的Forge *即使是在已经设置好的现有服务器上*
+   如果安装的Forge版本与settings.cfg中提供的版本不同，该脚本将删除旧的Forge，并重新下载并安装指定的版本。脚本也会执行非常多的基本检查，比如检查是否安装了正确的Java版本，检查EULA.txt是否已经更新。
 
-   After Forge/Minecraft are installed, the same script will act as a launcher to start the server, with an auto-restart-after-crash feature as well. (No need for a separate "install" script). It's also adaptable to smoothly transition to new versions of Forge *even on existing servers that have already been setup*. If the installed Forge version is different from what's supplied in the settings.cfg, the script will remove the old Forge and re-download and install the version specified. The script also performs *many* basic checks such as looking for a valid Java version installed and checking that EULA.txt has been updated.
-
-   All relevant settings are in the easily accessible "settings.cfg" file; Modpack creators can specify their pack's Minecraft and Forge versions, and server operators can specify JVM args and RAM allocation as desired.
-
-   IF THERE ARE ANY ISSUES
-   Please make a report on the github linked above
+   所有相关的设置都在易于访问的 "settings.cfg "文件中；Modpack的作者可以指定他们的包的Minecraft和Forge版本，服主可以根据需要指定JVM args和RAM分配。
 
 
 <br>
@@ -38,68 +32,70 @@
 
 # How To Use
 
-#### Do not modify `ServerStart.bat` or `ServerStart.sh`
-#### All settings are modified in `settings.cfg` instead.
+#### 不要修改`ServerStart.bat`或`ServerStart.sh`
+#### 所有的设置都在`settings.cfg`中修改
 
 Windows: **`ServerStart.Bat`** *(Run/Double-Click)*  
 Linux: **`bash ServerStart.sh`** *(must be bash, not shell/sh)*
 
-#### Arguments
+#### 参数
 | Setting   | Description                |
 | ----------|----------------------------|
-| -i, --install, install | Runs only the install portion of the script. The server will not automatically start after.|
-| -a, --auto | Skips user input stages and uses default values instead |
+| -i, --install, install | 只运行脚本的安装部分，安装完成后，服务器不会自动启动。|
+| -a, --auto | 跳过用户输入阶段，使用默认值代替。 |
 
-#### If you're running your server on a remote system, the following command can be used to keep it running even when you close your terminal:
+#### 如果是远程控制运行的服务器，则可以使用以下命令使其即使在关闭终端时也保持运行:
  ```
  nohup ./ServerStart.sh -a &>/dev/null &
  ```
 ________________   
 
 ### settings.cfg   
-Formatting is very important for it to load correctly: 
-* `SETTING=VALUE`
-* No spaces around the equal sign
-* One setting per line
+正确的格式对于正确加载非常重要。
+* `SETTING=VALUE`。
+* 等号周围没有空格
+* 每行一个设置
 
 
 | Setting   | Description                | Example Value | 
 | ----------|----------------------------| :------------:|
-| **MAX_RAM**      | How much max RAM to allow the JVM to allocate to the server  | `5G` |
-| **JAVA_ARGS**      | The defaults provided should be best for most people, but can be edited if desired | *See Below* |
-| **CRASH_COUNT** | The max number of consecutive crashes that each occur within so many seconds of each other. If max is reaches, the script will exit. This is to stop spamming restarts of a server with a critical issue. | `8` |
+| **MAX_RAM**      | 允许JVM分配给服务器的最大内存是多少？ | `5G` |
+| **JAVA_ARGS**      | 提供的默认值对大多数人来说应该是最好的，但如果需要的话，可以进行编辑。 | *See Below* |
+| **CRASH_COUNT** | 连续崩溃的最大次数，每次崩溃发生的秒数。如果达到最大值，脚本将退出。这是为了防止服务器在出现严重问题时的垃圾重启. | `8` |
 | **CRASH_TIMER** | The number of seconds to consider a crash within to be "consecutive" | `600` |
-| **RUN_FROM_BAD_FOLDER** | The scripts will not run from "temp" folders or "system" folders. If you want to force allow this, change the value to `1` | `0` | 
-| **IGNORE_OFFLINE** | The scripts will not run if a connection to the internet can not be found. If you want to force allow (i.e. to run a server for local/LAN only) then set to `1`. Note, however that it will need internet connection to at least perform initial download/install of the Forge binaries | `0` |
-| **IGNORE_JAVA_CHECK** | By default, the script will stop/error if it can not find 64-bit Java 1.8 or 1.9. Some packs might be able to run with less than 4G or RAM or on older 1.7 java. If you want to use an older version or are limited to a 32-bit OS, setting this to `1` will let the script continue | `0` | 
-| **USE_SPONGE** | Mostly unsupported and experimental. If set to `1` script will attempt to launch SpongeBootstrap but only if the bootstrap is present and SpongeForge is in Mods folder. This will not download/setup the required files either, merely launch the pack using them. **Sponge can cause undocumented errors and conflicts and therefore it's use is rarely supported by modpack developers. USE AT YOUR OWN RISK and only if you know what you're doing** | `0` |
-| **HIGH_CPU_PRIORITY** | This will attempt to start the Java process in a higher priority than "normal." This shouldn't have a major negative impact on the host computer but if it's causing conflicts or taking too much CPU time you can try disabling. *Linux implementation is still WIP (TODO)* | `1` |
-| **MODPACK_NAME** | Pack name to add flavor/description to script as it's running. Quotes are not needed. Can contain spaces. Technically can be very long, but will work better if short/concise (i.e. "Illumination" would be *much* better to use than "All The Mods Presents: Illumination") | `All The Mods` |
-| **DEFAULT_WORLD_TYPE** | Allows for changing the type of world used.  | `BIOMESOP` |
-| **MCVER** | Target Minecraft version. Usually set by pack dev before distributing and not intended to be changed by end-users. Must be complete/exact and matching the version on Forge's website (i.e. `1.10` is not the same as `1.10.2`) | `1.10.2` |
-| **FORGEVER** | Target Forge version. Usually set by pack dev before distributing and not intended to be changed by end-users. Requires the full version and exactly matching Forge's website. (i.e. `2254` will not work, but `12.18.3.2254` will) | `12.18.3.2281` | 
-| **FORGEURL** | Direct url to a Forge "installer" jar. Mostly for debugging purposes, but if a URL is specified, the Forge installer of this link will be downloaded regardless of the previous settings.\*   | `DISABLE` |
+| **RUN_FROM_BAD_FOLDER** | 脚本不会从 "temp "文件夹或 "system "文件夹运行。如果你想强制允许这样做，请将值改为 `1` | `0` | 
+| **IGNORE_OFFLINE** | 如果找不到互联网的连接，脚本将无法运行。如果你想强制允许(即只为本地/局域网运行服务器)，则设置为`1`。但请注意，它至少需要互联网连接来执行Forge文件的初始下载/安装。 | `0` |
+| **IGNORE_JAVA_CHECK** | 默认情况下，如果找不到64位的Java 1.8或1.9，脚本会停止/出错。一些整合包可能会在少于4G或内存较旧的1.7java上运行，如果你想使用较旧的版本或仅限于32位的操作系统，将此设置为`1`。如果你想使用旧的版本或仅限于32位操作系统，将此设置为`1`将使脚本继续运行。 | `0` | 
+| **USE_SPONGE** | 大部分是不被支持和实验性的。如果设置为`1`，脚本将尝试启动SpongeBootstrap，但只有在启动器存在且SpongeForge在Mods文件夹中时才会启动。这也不会下载/设置所需的文件，只是使用它们启动。**Sponge 可能会导致未记录的错误和冲突，因此它的使用很少被modpack开发者支持。使用时请自行承担风险，并且只有在您知道自己在做什么的情况下才能使用** | `0` |
+| **HIGH_CPU_PRIORITY** | 这将尝试以比 "normal "更高的优先级来启动Java进程。这应该不会对主机产生重大的负面影响，但如果它造成冲突或占用太多CPU时间，你可以尝试禁用。*Linux的实现仍然是WIP（TODO）*。| `1` |
+| **MODPACK_NAME** | 在脚本运行时添加描述的包名，不需要引号，可以包含空格。技术上可以很长，但如果简短/精炼，效果会更好) | `整合包名称` |
+| **DEFAULT_WORLD_TYPE** | 允许更改并使用的世界类型.  | `BIOMESOP` |
+| **MCVER** | 使用的Minecraft版本。通常由整合包开发者在发布前设置，一般用户无需更改。版本名称必须是完整或准确的，并与Forge网站上的版本相匹配（即`1.10`与`1.10.2`不同）| `1.12.2` |
+| **FORGEVER** | 目标Forge版本。通常由整合包开发者在发布前设置，一般用户无需更改。需要完整的版本，并与Forge的网站完全匹配。(即`2254`将无法工作，但`12.18.3.2254`可以) | `12.18.3.2281` | 
+| **FORGEURL** | 直接指向一个Forge "安装程序 "jar的网址，这主要是为了调试，但如果指定了一个URL，这个链接的Forge安装程序将被下载，而不考虑之前的设置.\*   | `DISABLE` |
 
 
-\**NOTE: Another debug/bypass options is for modpack creators to package and redistribute the forge installer matching their desired version as long as it's name matches the format: `forge-<MinecraftVersion>-<ForgeVersion>-installer.jar` If included, none will need to be downloaded first.*  
-
-<br>
+\**NOTE: 另一个调试/绕过选项是让modpack制作者打包并重新发布与他们所需版本相匹配Forge安装程序，只要其名称符合`forge-<MinecraftVersion>-<ForgeVersion>-installer.jar `如果包含，则不需要先下载。.*  
 
 <br>
 
 <br>
 
+<br>
 
-## Optional Java Arguments
 
-   Java can be tweaked with launch settings that can sometimes improve the performance of Minecraft over default (no launch options), especially for 1.10+ and larger packs such as All The Mods.
+## 可选的一些Java参数
+
+   可选择的Java参数
+
+   Java可以通过args进行调整，有时可以改善Minecraft的性能，超过默认args值（没有启动选项），特别是对于1.12+和更大的整合包，如All The Mods等。
 
 <br>
 
 
 ______________________________
 **BASIC**  
-These basic settings are recommended for general use for any modpack:
+这些基本设置建议用于任何modpack的一般用途。
    ```
    -d64 -server -XX:+AggressiveOpts -XX:ParallelGCThreads=3 -XX:+UseConcMarkSweepGC -XX:+UnlockExperimentalVMOptions -XX:+UseParNewGC -XX:+ExplicitGCInvokesConcurrent -XX:MaxGCPauseMillis=10 -XX:GCPauseIntervalMillis=50 -XX:+UseFastAccessorMethods -XX:+OptimizeStringConcat -XX:NewSize=84m -XX:+UseAdaptiveGCBoundary -XX:NewRatio=3 -Dfml.readTimeout=90 -Ddeployment.trace=true -Ddeployment.log=true -Ddeployment.trace.level=all -Dfml.debugNetworkHandshake=true -Dfml.badPacketCounter=10
    ```   
@@ -108,7 +104,7 @@ These basic settings are recommended for general use for any modpack:
 <br>
    
 ______________________________
-There are many opinions on what's considered good or not-so-good to use for JVM args that change from person-to-person, and over time. The settings above were based on [this great discussion/explanation](https://www.reddit.com/r/feedthebeast/comments/5jhuk9/modded_mc_and_memory_usage_a_history_with_a/) by CPW, the lead dev of EnderIO and a prominent contributor to the Forge project.
+关于JVM args的好与不好，有很多意见，这些意见因人而异，因时而异。上面的设置是基于[this great discussion/explanation](https://www.reddit.com/r/feedthebeast/comments/5jhuk9/modded_mc_and_memory_usage_a_history_with_a/)，作者是EnderIO的首席开发人员和Forge项目的杰出贡献者CPW。
 
 
 
@@ -119,17 +115,15 @@ There are many opinions on what's considered good or not-so-good to use for JVM 
 <br>
 
 
-# Background Story
-Mojang's [Minecraft EULA](https://account.mojang.com/documents/minecraft_eula) is extremely open and forgiving, going so far as to "encourage you to do cool stuff." One of the very few explicit restrictions and "the one major rule" prohibits re-distributing Minecraft or any part of it (including the Minecraft server binary files):
-> "In order to ensure the integrity of the Game, we need all Game downloads and updates to come from an authorized source. It's also important for us that 3rd party tools/services don't seem "official" as we can't guarantee their quality. It's part of the responsibility we have to the customers of Minecraft."
-
-This means that any modpack team/developer that wants to provide users with a *ready-to-use* server file package can't provide all the binaries and therefore would be incomplete. This script bridges that gap by dynamically fetching and installing MinecraftForge. The forge installer conveniently fetches the Minecraft binaries from Mojang's servers as well as the required library files as well providing a seamless "install" step followed by launching/running the server after initial setup. 
-
-From there we decided we wanted to go all-out providing as many features and configuration options as possible to make setting up and running a server as easy as possible. We want this to be more than just a simple "workaround" to the distribution restriction, but a full-featured option for server operators that don't use a control panel or management software.
+# 特别鸣谢
+   本项目是以All The Mods Team的项目Server-Scripts进行翻译而已，感谢All The Mods Team的的付出
 
 
 
-
+<br>
+<br>
+<br>
+<br>
 
 
 _____________________
@@ -142,40 +136,11 @@ _____________________
 
 
 # Custom License
-The *only* reason we included a license is because we wanted it to be **easier** for more people to use/share this. Some places (i.e. Curse) need some form of "official" notice allowing content to be used. Since we were making a license anyway, we thought it would be nice to add an attribution clause so others didn't try to claim our work as their own. The result is this custom license based on a combination of the [MIT license](https://opensource.org/licenses/MIT) and a couple parts from Vaskii's [Botania](http://botaniamod.net/license.php)/[Psi](http://psi.vazkii.us/license.php) license:
-```
-Copyright (c) 2017 All The Mods Team
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-You must give appropriate credit to the "All The Mods Team" as original 
-creators for any parts of this Software being used. A link back to original 
-content is optional but would be greatly appreciated. 
-
-It is forbidden to charge for access to the distribution of this Software or 
-gain money through it. This includes any type of inline advertisement, such 
-as url shorteners (adf.ly or otherwise) or ads. This also includes 
-restricting any amount of access behind a paywall. Special permission is 
-given to allow this Software to be bundled or distributed with projects on 
-Curse.com, CurseForge.com or their related sub-domains and subsidiaries.
-
-Derivative works must be open source (have its source visible and allow for 
-redistribution and modification).
-
-The above copyright notice and conditions must be included in all copies or 
-substantial portions of the Software, including derivative works and 
-re-licensing thereof. 
-```
-
+   请查看License.md
 ____________________________
 ## DISCLAIMERS
 
-"All The Mods Team" is not affiliated with "Mojang," "Oracle," "Curse," "Twitch," "Sponge," "Forge" or any other entity (or entity owning a referenced product) potentially mentioned in this document or relevant source code for this Software. The use of their names and/or trademarks is strictly circumstantial and assumed fair-use. All credit for their respective works, software, branding, copyrights and/or trademarks belongs entirely to them as original owners/licensers.
+"All The Mods Team" and me is not affiliated with "Mojang," "Oracle," "Curse," "Twitch," "Sponge," "Forge" or any other entity (or entity owning a referenced product) potentially mentioned in this document or relevant source code for this Software. The use of their names and/or trademarks is strictly circumstantial and assumed fair-use. All credit for their respective works, software, branding, copyrights and/or trademarks belongs entirely to them as original owners/licensers.
 
 ```
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR

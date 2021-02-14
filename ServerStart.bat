@@ -1,12 +1,10 @@
 @ECHO OFF
 ::::
 :::: Minecraft-Forge 服务器安装/启动器脚本
-:::: 由 "All The Mods"团队创建
 ::::
 :::: 这个脚本将设置并启动 Minecraft服务器
 :::: *** 本文件无需修改，请使用 "settings.cfg" ***。
 ::::
-::::    汉化 By:TaoXiaoBai 
 ::::
 
 :::: *** 此文件不打算修改，请使用 "settings.cfg" ***。
