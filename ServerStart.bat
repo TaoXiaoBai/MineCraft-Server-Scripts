@@ -4,11 +4,8 @@
 :::: 由 "All The Mods"团队创建
 ::::
 :::: 这个脚本将设置并启动 Minecraft服务器
-:::: *** 本文件不打算修改，请使用 "settings.cfg" ***。
+:::: *** 本文件无需修改，请使用 "settings.cfg" ***。
 ::::
-:::: 寻求"All The Mods"团队帮助（或更多细节）。
-::::    Github: https://github.com/AllTheMods/Server-Scripts
-::::    Discord: https://discord.gg/FdFDVWb
 ::::    汉化 By:TaoXiaoBai 
 ::::
 
@@ -900,7 +897,7 @@ ECHO.
 ECHO.
 ECHO.
 ECHO.
-ECHO 服务器将在不到 30 秒内 “自动” 重新启动...
+ECHO 服务器将在 30 秒内重新启动...
 CHOICE /M:"现在重启 (Y) 停止重启并退出 (N)" /T:30 /D:Y
 IF %ERRORLEVEL% GEQ 2 (
 	ECHO INFO: 服务器在自动重启之前被手动停止 1>>  "%~dp0logs\serverstart.log" 2>&1
