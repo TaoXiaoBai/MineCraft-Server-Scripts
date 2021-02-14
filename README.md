@@ -1,7 +1,8 @@
 # Modpack 服务器启动脚本
 
-   只是一个Minecraft-Forge 服务器安装/启动脚本
-   （Readme修改中）
+   只是一个Minecraft-Forge 服务器安装/启动脚本<br>
+   （Readme修改中）<br>
+   有文本问题可以直接开issue
 
 
 
@@ -32,7 +33,7 @@
 
 # 如何使用？
 
-#### 不要修改`ServerStart.bat`或`ServerStart.sh`
+#### 请不要修改`ServerStart.bat`或`ServerStart.sh`
 #### 所有的设置都在`settings.cfg`中修改
 
 Windows: **`ServerStart.Bat`** *(Run/Double-Click)*  
