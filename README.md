@@ -30,7 +30,7 @@
 <br>
 
 
-# How To Use
+# 如何使用？
 
 #### 不要修改`ServerStart.bat`或`ServerStart.sh`
 #### 所有的设置都在`settings.cfg`中修改
