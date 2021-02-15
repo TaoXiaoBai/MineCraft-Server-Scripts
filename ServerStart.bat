@@ -383,13 +383,13 @@ IF %ERRORLEVEL% EQU 0 (
 
 REM If Google ping failed try one more time with L3 just in case
 IF MC_SERVER_TMP_FLAG EQU 1 (
-	%MC_SYS32%\PING.EXE -n 2 -w 1000 4.2.2.1 | %MC_SYS32%\FIND.EXE "TTL="  1>>  "%~dp0logs\serverstart.log" 2>&1
+	%MC_SYS32%\PING.EXE -n 2 -w 1000 223.5.5.5 | %MC_SYS32%\FIND.EXE "TTL="  1>>  "%~dp0logs\serverstart.log" 2>&1
 	IF %ERRORLEVEL% EQU 0 (
 		SET MC_SERVER_TMP_FLAG=0
-		INFO: Ping of "4.4.2.1" Successfull 1>>  "%~dp0logs\serverstart.log" 2>&1
+		INFO: 已通过Ping检测到阿里 DNS 1>>  "%~dp0logs\serverstart.log" 2>&1
 	) ELSE (
 		SET MC_SERVER_TMP_FLAG=1
-		ECHO WARN: Ping of "4.4.2.1" Failed 1>>  "%~dp0logs\serverstart.log" 2>&1
+		ECHO WARN: 尝试通过Ping检测阿里 DNS时发生错误 1>>  "%~dp0logs\serverstart.log" 2>&1
 	)
 )
 

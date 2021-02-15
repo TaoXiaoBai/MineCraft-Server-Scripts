@@ -358,7 +358,7 @@ while $run ; do
                 
                 if ping -c 1 223.5.5.5 >> /dev/null 2>&1; then
                     echo "INFO: Ping to Ali DNS successful" >>logs/serverstart.log
-                    echo "已通过Ping检测到与阿里 DNS的链接"
+                    echo "已通过Ping检测到阿里 DNS"
                 else
                     echo "ERROR: Ping to L4 failed. No internet access?"  >>logs/serverstart.log
                     echo "尝试通过Ping检测阿里 DNS时发生错误，当前暂无网络连接？?"
