@@ -117,7 +117,7 @@ ______________________________
 
 
 # 特别鸣谢
-   本项目是以All The Mods Team的项目Server-Scripts进行翻译而已，感谢All The Mods Team的的付出
+   本项目是以All The Mods Team的项目Server-Scripts进行翻译为主的，在此感谢All The Mods Team的的付出
 
 
 
@@ -141,19 +141,7 @@ _____________________
 ____________________________
 ## DISCLAIMERS
 
-"All The Mods Team" and me is not affiliated with "Mojang," "Oracle," "Curse," "Twitch," "Sponge," "Forge" or any other entity (or entity owning a referenced product) potentially mentioned in this document or relevant source code for this Software. The use of their names and/or trademarks is strictly circumstantial and assumed fair-use. All credit for their respective works, software, branding, copyrights and/or trademarks belongs entirely to them as original owners/licensers.
-
-```
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-
+请查看License.md
 _______________________________
 
 
