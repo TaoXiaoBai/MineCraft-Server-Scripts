@@ -372,13 +372,13 @@ ECHO 正在检查Internet连接...
 ECHO 信息：正在检查基本Internet连接... 1>>  "%~dp0logs\serverstart.log" 2>&1
 
 REM Try with Google DNS
-%MC_SYS32%\PING.EXE -n 2 -w 1000 8.8.8.8 | %MC_SYS32%\FIND.EXE "TTL="  1>>  "%~dp0logs\serverstart.log" 2>&1
+%MC_SYS32%\PING.EXE -n 2 -w 1000 114.114.114.114 | %MC_SYS32%\FIND.EXE "TTL="  1>>  "%~dp0logs\serverstart.log" 2>&1
 IF %ERRORLEVEL% EQU 0 (
     SET MC_SERVER_TMP_FLAG=0
-	ECHO INFO: Ping of "8.8.8.8" Successfull 1>>  "%~dp0logs\serverstart.log" 2>&1
+	ECHO INFO: 已通过Ping成功检测到114 DNS 1>>  "%~dp0logs\serverstart.log" 2>&1
 ) ELSE (
     SET MC_SERVER_TMP_FLAG=1
-	ECHO WARN: Ping of "8.8.8.8" Failed 1>>  "%~dp0logs\serverstart.log" 2>&1
+	ECHO WARN: 尝试通过Ping检测114 DNS时发生错误 1>>  "%~dp0logs\serverstart.log" 2>&1
 )
 
 REM If Google ping failed try one more time with L3 just in case

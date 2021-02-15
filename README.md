@@ -1,7 +1,7 @@
 # MineCraft forge 服务器启动脚本
 
    只是一个Minecraft-Forge 服务器安装/启动脚本<br>
-   （Readme修改中）<br>
+   （Readme优化中）<br>
    有文本问题可以直接开issue
 
 
@@ -117,7 +117,7 @@ ______________________________
 
 
 # 特别鸣谢
-   本项目是以All The Mods Team的项目Server-Scripts进行翻译为主的，在此感谢All The Mods Team的的付出
+   本项目是以All The Mods Team的项目Server-Scripts进行翻译并优化为主，在此感谢All The Mods Team的的付出
 
 
 
@@ -143,14 +143,3 @@ ____________________________
 
 请查看License.md
 _______________________________
-
-
-<br>
-<br>
-<br>
-<br>
-<p align="center">
-  <img src="https://i1.wp.com/allthepacks.com/wp-content/uploads/2017/01/Abyus4d.png" alt="All The Mods" width="400" height="400">
-</p>
-<br>
-
