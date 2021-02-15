@@ -126,7 +126,7 @@ install_server(){
 
 # Make sure users aren't trying to run script via sh directly (won't work)
 if [ ! "$BASH_VERSION" ] ; then
-    echo "Please do not use sh to run this script ($0). Use bash instead (or execute it directly)" 1>&2
+    echo "请不要使用sh来运行这个脚本（$0）,需要使用bash来代替(或直接执行)" 1>&2
     exit 1
 fi
 
@@ -182,8 +182,8 @@ if [ -f ./settings.cfg ]; then
         fi
     done < ./settings.cfg
 else
-    echo "Failed to find settings file default settings will be used may cause issues"
-    echo "WARN: Failed to find settings.cfg" >>logs/serverstart.log
+    echo "找不到settings.cfg,将使用默认设置，这可能会出现问题。"
+    echo "WARN: 找不到settings.cfg" >>logs/serverstart.log
 fi
 
 while :; do
@@ -259,8 +259,8 @@ if [[ $MC_SERVER_AUTO_RESPOND == 0 ]]; then
     export answer="n"
     read -r -t 6 -p "About to start server. Force re-install (y/n)?  " answer
     if [[ "$answer" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        echo "INFO: User chose to manually re-install server files"  >>logs/serverstart.log 2>&1
-        echo "User chose to manually re-install server files"
+        echo "INFO: 用户选择手动重新安装服务器文件"  >>logs/serverstart.log 2>&1
+        echo "用户选择手动重新安装服务器文件"
         install_server
     fi
 fi
@@ -300,22 +300,22 @@ while $run ; do
     #Checks if users has full read/write access to the server dir
     if [ ! -r . ] || [ ! -w . ]; then
         echo "WARN: Not full R/W access on current directory"
-        echo "You do not have full R/W access to current directory"
+        echo "没有对当前目录的读写权"
         if [ ${MC_SERVER_RUN_FROM_BAD_FOLDER} -eq 0 ]; then
             echo "ERROR: Stopping due to bad folder (R/W access)" >>logs/serverstart.log
-            echo "RUN_FROM_BAD_FOLDER setting is off, exiting script"
+            echo "RUN_FROM_BAD_FOLDER处于关闭状态，正在退出脚本。"
             exit 0
         else
             echo "WARN: Bad folder (R/W) cut continuing anyway" >>logs/serverstart.log
-            echo "Bypassing no R/W halt (per script settings)"
+            echo "正在绕过无读写权限停止（根据脚本设置）。"
         fi
     fi
     
     #Checks java version
     if [[ ${MC_SERVER_IGNORE_JAVA_CHECK} == 1 ]]; then
-        echo "WARN: Skipping validation of proper Java install/version..".
-        echo "IF Java is not installed, too old, or not 64-bit, the server probably won't start/run correctly"
-        echo "WARN: Skipping validation of Java install..." >>logs/serverstart.log
+        echo "WARN: 跳过对Java安装/版本的检查..".
+        echo "如果Java没有安装，太旧，或者不是64位，服务器都可能无法正常启动/运行"
+        echo "WARN: 跳过对Java安装的验证..." >>logs/serverstart.log
     else
         command -v $MC_SERVER_JAVA >> /dev/null 2>&1
         if [ $? -eq 0 ]; then
@@ -335,8 +335,8 @@ while $run ; do
                 exit 1
             fi
         else
-            echo "ERROR: Java is not installed install Java before continuing"
-            echo "ERROR: No Java detected" >>logs/serverstart.log
+            echo "ERROR: 未安装Java，请先安装Java再继续操作"
+            echo "ERROR: 未检测到Java" >>logs/serverstart.log
             exit 1
         fi
     fi
@@ -344,44 +344,44 @@ while $run ; do
     #Check internet connection
     if [ ${MC_SERVER_IGNORE_OFFLINE} -eq 1 ]; then
         echo "WARN: Internet connectivity checking is disabled" >>logs/serverstart.log
-        echo "Skipping internet connectivity check"
+        echo "跳过互联网连接检查"
     else
         command -v ping >> /dev/null 2>&1
         if [ $? -eq 0 ]; then
             echo "DEBUG: Ping found on system" >>logs/serverstart.log
-            if ping -c 1 8.8.8.8 >> /dev/null 2>&1; then
-                echo "INFO: Ping to Google DNS successful" >>logs/serverstart.log
-                echo "Ping to Google DNS successful"
+            if ping -c 1 114.114.114.114 >> /dev/null 2>&1; then
+                echo "INFO: Ping to 114 DNS successful" >>logs/serverstart.log
+                echo "已通过Ping成功检测到114 DNS"
             else
-                echo "ERROR: Ping to Google DNS failed. No internet access?" >>logs/serverstart.log
-                echo "Ping to Google DNS failed. No internet access?"
+                echo "ERROR: Ping to 114 DNS failed. No internet access?" >>logs/serverstart.log
+                echo "尝试通过Ping检测114 DNS时发生错误，当前暂无网络连接？"
                 
-                if ping -c 1 4.2.2.1 >> /dev/null 2>&1; then
-                    echo "INFO: Ping to L4 successful" >>logs/serverstart.log
-                    echo "Ping to L4 successful"
+                if ping -c 1 223.5.5.5 >> /dev/null 2>&1; then
+                    echo "INFO: Ping to Ali DNS successful" >>logs/serverstart.log
+                    echo "已通过Ping检测到与阿里 DNS的链接"
                 else
                     echo "ERROR: Ping to L4 failed. No internet access?"  >>logs/serverstart.log
-                    echo "Ping to L4 failed. No internet access?"
-                    echo "IGNORE_OFFLINE is set to off exiting"
+                    echo "尝试通过Ping检测阿里 DNS时发生错误，当前暂无网络连接？?"
+                    echo "IGNORE_OFFLINE 被设置为关闭，正在退出"
                     exit 1
                 fi
             fi
         else
-            echo "WARN: Ping not install can not check network connection" >>logs/serverstart.log
-            echo "Ping is not install can not assure internet connection"
+            echo "WARN: Ping没有被安装，无法检查网络连接" >>logs/serverstart.log
+            echo "没有安装Ping，则无法检查网络连接"
         fi
     fi
     
     #Checking minecraft has the files its needs to run
     if [ ! -d ./libraries ] ; then
         echo "WARN: library directory not found" >>logs/serverstart.log
-        echo "Required files not found, need to install Forge"
+        echo "未找到所需文件，需要安装Forge"
         install_server
     fi
     forge=$(ls forge*"$MC_SERVER_MCVER"*"$MC_SERVER_FORGEVER"*universal.jar 2>>logs/serverstart.log)
     if [[ $? != 0 ]] ; then
         echo "WARN: no forge jar for MCVER: $MC_SERVER_MCVER and FORGEVER: $MC_SERVER_FORGEVER found"  >>logs/serverstart.log
-        echo "Required files not found, need to install Forge"
+        echo "未找到所需文件，需要安装Forge"
         install_server
     else
         export MC_SERVER_FORGE_JAR="${forge[0]}"
@@ -390,26 +390,26 @@ while $run ; do
     
     if [ ! -f ./minecraft_server.${MC_SERVER_MCVER}.jar ] ; then
         echo "WARN: minecraft_server.${MC_SERVER_MCVER}.jar not found" >>logs/serverstart.log
-        echo "Required files not found, need to install Forge"
+        echo "未找到所需文件，需要安装Forge"
         install_server
     fi
     
     #Checks if the EULA exists if not generates it
     if [ ! -f eula.txt ]; then
-        echo "Could not find eula.txt going to generate it"
+        echo "找不到eula.txt，正在准备创建"
         eula_gen
     else
         if grep -Fxq "eula=true" eula.txt; then
             echo "INFO: Found 'eula=true' in 'eula.txt'" >>logs/serverstart.log
         else
-            echo "Could not find 'eula=true' in 'eula.txt'"
+            echo "在'eula.txt'中找不到'eula=true''"
             eula_gen
         fi
     fi
     
     #Checks if settings.properties exists and if not adds some default values
     if [ ! -f server.properties ]; then
-        echo "Could not find server.properties, creating initial copy..."
+        echo "找不到server.properties，正在创建并使用默认值..."
         echo "INFO: server.properties not found... populating default" >>logs/serverstart.log
         {
             echo "view-distance=8"
@@ -422,7 +422,7 @@ while $run ; do
     fi
     
     clear
-    echo "Starting server"
+    echo "开始启动服务器..."
     if [[ $MC_SERVER_JMX_ENABLE == 1 ]]; then
         echo "JMX Enabled on port ${MC_SERVER_JMX_PORT}"
     fi
@@ -444,14 +444,14 @@ while $run ; do
         last_crash=$((SECONDS))
     fi
     if [[ "$a" == "$MC_SERVER_CRASH_COUNT" ]]; then
-        echo "The server has crashed too many times"
-        echo "ERROR: Server has failed to start too many times in a row." >>logs/serverstart.log
+        echo "服务器崩溃的次数太多"
+        echo "ERROR: 服务器连续多次启动失败." >>logs/serverstart.log
         exit 1
     fi
     
     export answer="y"
     if [[ $MC_SERVER_AUTO_RESPOND == 0 ]]; then
-        echo "Server will restart in ~10 seconds. No input needed..."
+        echo "服务器将在10秒后重新启动,无需输入..."
         read -r -t 12 -p "Restart now (y) or exit to shell (n)?  " answer
     fi
     if [[ "$answer" =~ ^([nN][oO]|[nN])+$ ]]; then
@@ -461,5 +461,5 @@ while $run ; do
     fi
     echo ""
     echo "INFO: Server-auto-restart commencing"  >>logs/serverstart.log
-    echo "Rebooting now!"
+    echo "正在重启"
 done
