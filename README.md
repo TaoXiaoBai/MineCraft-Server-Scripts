@@ -1,4 +1,4 @@
-# Modpack 服务器启动脚本
+# MineCraft forge 服务器启动脚本
 
    只是一个Minecraft-Forge 服务器安装/启动脚本<br>
    （Readme修改中）<br>
@@ -21,7 +21,7 @@
    它还能适应平稳过渡到新版本的Forge *即使是在已经设置好的现有服务器上*
    如果安装的Forge版本与settings.cfg中提供的版本不同，该脚本将删除旧的Forge，并重新下载并安装指定的版本。脚本也会执行非常多的基本检查，比如检查是否安装了正确的Java版本，检查EULA.txt是否已经更新。
 
-   所有相关的设置都在易于访问的 "settings.cfg "文件中；Modpack的作者可以指定他们的包的Minecraft和Forge版本，服主可以根据需要指定JVM args和RAM分配。
+   所有相关的设置都在 "settings.cfg "内；Modpack的作者可以指定他们的包的Minecraft和Forge版本，服主可以根据需要指定JVM args和RAM分配。
 
 
 <br>
@@ -89,7 +89,7 @@ ________________
 
    可选择的Java参数
 
-   Java可以通过args进行调整，有时可以改善Minecraft的性能，超过默认args值（没有启动选项），特别是对于1.12+和更大的整合包，如All The Mods等。
+   Java可以通过args进行调整，有时可以改善Minecraft的性能（对比没有调整的默认情况），特别是对于1.12+和更大的整合包，如All The Mods等。
 
 <br>
 
