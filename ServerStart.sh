@@ -27,18 +27,18 @@
 ####
 
 eula_gen(){
-    echo "By typing Yes you are indicating your agreement to the Minecraft EULA (https://account.mojang.com/documents/minecraft_eula)."
-    echo "Please read the EULA linked above"
+    echo "输入 "YES"表示您同意Minecraft EULA (https://account.mojang.com/documents/minecraft_eula)."
+    echo "请阅读上面链接的EULA"
     
     export answer="No"
     echo ""
     read -r -p "Type Yes is agree otherwise type No? " answer
     if [[ "$answer" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        echo "INFO: EULA accepted" >>logs/serverstart.log 2>&1
+        echo "INFO: 已同意 EULA " >>logs/serverstart.log 2>&1
         echo "#Minecraft EULA (https://account.mojang.com/documents/minecraft_eula)." > eula.txt
         echo "eula=true" >> eula.txt
     else
-        echo "INFO: EULA rejected" >>logs/serverstart.log 2>&1
+        echo "INFO: 未同意 EULA " >>logs/serverstart.log 2>&1
         echo "#Minecraft EULA (https://account.mojang.com/documents/minecraft_eula)." > eula.txt
         echo "eula=false" >> eula.txt
         exit 0
@@ -46,8 +46,8 @@ eula_gen(){
 }
 
 install_server(){
-    echo "Starting install of Forge/Minecraft server binaries"
-    echo "DEBUG: Starting install of Forge/Minecraft server binaries" >>logs/serverstart.log
+    echo "开始安装Forge/Minecraft服务器的二进制文件。"
+    echo "DEBUG: 开始安装Forge/Minecraft服务器的二进制文件。" >>logs/serverstart.log
     
     
     installers=$(ls forge*"$MC_SERVER_MCVER"*"$MC_SERVER_FORGEVER"*installer.jar 2>>logs/serverstart.log)
@@ -59,10 +59,10 @@ install_server(){
             read -r -t 8 -p "Installer found. Use it (y) or download again (n)?  " answer
         fi
         if [[ "$answer" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-            echo "INFO: Skipping download. Using existing installer.jar" >>logs/serverstart.log 2>&1
-            echo "Skipping download. Using existing installer.jar"
+            echo "跳过下载。使用现有的installer.jar" >>logs/serverstart.log 2>&1
+            echo "跳过下载。使用现有的installer.jar"
         else
-            echo "Moving current installer to ./DELETEME"
+            echo "将当前安装程序移动到./DELETEME"
             mkdir -p DELETEME
             mv -f "./$installer" ./DELETEME >>logs/serverstart.log 2>&1
             installer=0
@@ -73,7 +73,7 @@ install_server(){
     
     if [[ $installer == 0 ]]; then
         echo "DEBUG: no forge installer for MCVER: $MC_SERVER_MCVER and FORGEVER: $MC_SERVER_FORGEVER found"  >>logs/serverstart.log
-        echo "No installer found will try to download it"
+        echo "没有找到安装程序，将尝试下载"
         
         if [ "${MC_SERVER_FORGEURL}" = "DISABLE" ]; then
             export MC_SERVER_URL="https://files.minecraftforge.net/maven/net/minecraftforge/forge/${MC_SERVER_MCVER}-${MC_SERVER_FORGEVER}/forge-${MC_SERVER_MCVER}-${MC_SERVER_FORGEVER}-installer.jar"
@@ -91,8 +91,8 @@ install_server(){
                 echo "DEBUG: (wget) Downloading ${MC_SERVER_URL}" >>logs/serverstart.log 2>&1
                 wget -O "forge.$MC_SERVER_MCVER-$MC_SERVER_FORGEVER-installer.jar" "${MC_SERVER_URL}" >>logs/serverstart.log 2>&1
             else
-                echo "Neither wget or curl were found on your system. Please install one and try again"
-                echo "ERROR: Neither wget or curl were found" >>logs/serverstart.log 2>&1
+                echo "当前系统中没有找到wget或curl，请安装一个，然后再试一次"
+                echo "ERROR: 当前系统中没有找到wget或curl，请安装一个，然后再试一次" >>logs/serverstart.log 2>&1
                 exit 1
             fi
         fi
@@ -102,9 +102,9 @@ install_server(){
     if [[ $? -eq 0 ]] ; then
         installer=${installers[0]}
         export MC_SERVER_INSTALLER=$installer
-        echo "Moving unneeded files/folders to ./DELETEME"
+        echo "将不需要的文件/文件夹移至./DELETEME"
         {
-            echo "INFO: Moving unneeded files/folders to ./DELETEME"
+            echo "INFO: 将不需要的文件/文件夹移至./DELETEME"
             rm -rf ./DELETEME
             mv -f ./asm ./DELETEME
             mv -f ./libraries ./DELETEME
@@ -113,8 +113,8 @@ install_server(){
             mv -f ./forge*universal.jar ./DELETEME
             mv -f ./OpenComputersMod*lua* ./DELETEME
         } >>logs/serverstart.log 2>&1
-        echo "Installing Forge Server, please wait..."
-        echo "INFO: Installing Forge Server" >>logs/serverstart.log 2>&1
+        echo "正在安装Forge Server，请稍等......"
+        echo "INFO: 正在安装Forge Server" >>logs/serverstart.log 2>&1
         "$MC_SERVER_JAVA" -jar "$installer" --installServer   >>logs/serverstart.log 2>&1
         
     else
