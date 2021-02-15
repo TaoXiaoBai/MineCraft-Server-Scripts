@@ -3,69 +3,33 @@
 :::: Minecraft-Forge 服务器安装/启动器脚本
 ::::
 :::: 这个脚本将设置并启动 Minecraft服务器
-:::: *** 本文件无需修改，请使用 "settings.cfg" ***
+:::: *** 本文件无需修改，如有需要请使用 "settings.cfg" ***
 ::::
 ::::
-:::: *** 本文件无需修改，请使用 "settings.cfg" ***
+:::: *** 本文件无需修改，如有需要请使用 "settings.cfg" ***
 
 ::================================================================================::
-::*** LICENSE ***::
+::*** LICENSE and DISCLAIMERS ***::
 
-:: The only reason we included a license is because we wanted it to be easier 
-:: for more people to use/share this. Some places (i.e. Curse) need some form of 
-:: "official" notice allowing content to be used. Since we were making a license 
-:: anyway, we thought it would be nice to add an attribution clause so others 
-:: didn't try to claim our work as their own. The result is this custom license 
-:: based on a combination of the MIT license and a couple parts from Vaskii's 
-:: Botania/Psi license:
-
-	:: Copyright (c) 2017 All The Mods Team
-
-	:: Permission is hereby granted, free of charge, to any person obtaining a copy
-	:: of this software and associated documentation files (the "Software"), to deal
-	:: in the Software without restriction, including without limitation the rights
-	:: to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	:: copies of the Software, and to permit persons to whom the Software is
-	:: furnished to do so, subject to the following conditions:
-
-	:: You must give appropriate credit to the "All The Mods Team" as original 
-	:: creators for any parts of this Software being used. A link back to original 
-	:: content is optional but would be greatly appreciated. 
-
-	:: It is forbidden to charge for access to the distribution of this Software or 
-	:: gain money through it. This includes any type of inline advertisement, such 
-	:: as url shorteners (adf.ly or otherwise) or ads. This also includes 
-	:: restricting any amount of access behind a paywall. Special permission is 
-	:: given to allow this Software to be bundled or distributed with projects on 
-	:: Curse.com, CurseForge.com or their related sub-domains and subsidiaries.
-
-	:: Derivative works must be open source (have its source visible and allow for 
-	:: redistribution and modification).
-
-	:: The above copyright notice and conditions must be included in all copies or 
-	:: substantial portions of the Software, including derivative works and 
-	:: re-licensing thereof. 
-
+:: 点击下方链接查看LICENSE 与 DISCLAIMERS
+:: https://github.com/TaoXiaoBai/MineCraft-Server-Scripts/blob/master/LICENSE.md 
 ::================================================================================::
-::*** DISCLAIMERS ***::
+::*** 项目说明 ***::
 
-	:: "All The Mods Team" is not affiliated with "Mojang," "Oracle," 
-	:: "Curse," "Twitch," "Sponge," "Forge" or any other entity (or entity owning a 
-	:: referenced product) potentially mentioned in this document or relevant source 
-	:: code for this Software. The use of their names and/or trademarks is strictly 
-	:: circumstantial and assumed fair-use. All credit for their respective works, 
-	:: software, branding, copyrights and/or trademarks belongs entirely to them as 
-	:: original owners/licensers.
+	:: 本项目为基于ALL THE MOD Team的Server-Scripts的翻译+优化
+	:: 有任何文本方面的问题都可以开issues
+	:: 
+	:: 
+	:: 
+	:: 
+	:: 
 
-	:: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	:: IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	:: FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	:: AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	:: LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	:: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	:: SOFTWARE.
+	:: 关于settings.cfg中的选项都可在ReadMe中查看
+	:: https://github.com/TaoXiaoBai/MineCraft-Server-Scripts
+	:: 
+	:: 
 
-:::: *** THIS FILE NOT INTENDED TO BE EDITED, USE "settings.cfg" INSTEAD ***
+:::: *** 本文件无需修改，如有需要请使用 "settings.cfg" ***
 
 SETLOCAL
 REM Internal Scripty stuff
