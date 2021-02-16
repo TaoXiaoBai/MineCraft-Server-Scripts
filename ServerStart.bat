@@ -23,7 +23,6 @@
 	:: 
 	:: 
 	:: 
-
 	:: 关于settings.cfg中的选项都可在ReadMe中查看
 	:: https://github.com/TaoXiaoBai/MineCraft-Server-Scripts
 	:: 
@@ -200,15 +199,14 @@ ECHO 运行 Forge %MC_SERVER_FORGESHORT% 为 Minecraft %MC_SERVER_MCVER%。
 TIMEOUT 1 >nul
 ECHO.
 ECHO ::::::::::::::::::::::::::::::::::::::::::::::::::::
-ECHO    Minecraft-Forge 服务器 安装/启动 脚本
-ECHO    (由 "All The Mods" 团队制作)
+ECHO    	  MineCraft-Server-Scripts 
+ECHO    			正在启动
 ECHO ::::::::::::::::::::::::::::::::::::::::::::::::::::
 ECHO.
 ECHO 本bat用于启动 Minecraft Forge 服务器
 ECHO.
 ECHO 寻求帮助 (或更多详细信息);
-ECHO    Github:   https://github.com/AllTheMods/Server-Scripts
-ECHO    Discord:  https://discord.gg/FdFDVWb
+ECHO    Github:   https://github.com/TaoXiaoBai/MineCraft-Server-Scripts
 ECHO.
 ECHO.
 
@@ -523,7 +521,7 @@ REM Just in case there's anything pending or dupe-named before starting...
 (FOR /f "tokens=* delims=*" %%x in ('dir "%~dp0*forge*%MC_SERVER_MCVER%*%MC_SERVER_FORGEVER%*installer.jar" /B /O:-D') DO SET "MC_SERVER_TMP_FLAG=%%x" & GOTO INSTALL1) 1>> "%~dp0logs\serverstart.log" 2>&1
 
 :INSTALL1
-REM Delete old/duplicate installers
+REM 删除旧的或者重复的安装程序
 ECHO: DEBUG: MC_SERVER_TMP_FLAG=%MC_SERVER_TMP_FLAG% 1>> "%~dp0logs\serverstart.log" 2>&1
 ATTRIB +R "%MC_SERVER_TMP_FLAG%"  1>> "%~dp0logs\serverstart.log" 2>&1 || ECHO INFO: No Forge Installer present to read-only 1>> "%~dp0logs\serverstart.log" 2>&1
 DEL "%~dp0*forge*installer*.jar*" /A:-R  1>> "%~dp0logs\serverstart.log" 2>&1 || ECHO INFO: No Forge Installers present to delete 1>> "%~dp0logs\serverstart.log" 2>&1
@@ -545,7 +543,7 @@ IF NOT %MC_SERVER_IGNORE_OFFLINE% EQU 0 (
 	GOTO FORGEFILEPREP
 )
 
-REM Ping minecraftforge before attempting download
+REM 在尝试下载之前，先ping minecraftforge
 %MC_SYS32%\PING.EXE -n 2 -w 1000 minecraftforge.net | %MC_SYS32%\FIND.EXE "TTL="  1>> "%~dp0logs\serverstart.log" 2>&1
 IF %ERRORLEVEL% EQU 0 (
 	ECHO INFO: Ping of "minecraftforge.net" Successfull 1>>  "%~dp0logs\serverstart.log" 2>&1
@@ -575,7 +573,7 @@ IF NOT %MC_SERVER_FORGEURL%==DISABLE (
 SET MC_SERVER_TMP_FLAG=0
 
 :FETCHHTML
-REM Download Forge Download Index HTML to parse the URL for the direct download
+REM 下载Forge，下载索引HTML解析网址直接下载
 ECHO INFO: Fetching index html from forge ^( https://files.minecraftforge.net/maven/net/minecraftforge/forge/index_%MC_SERVER_MCVER%.html ^) 1>>  "%~dp0logs\serverstart.log" 2>&1
 %MC_SYS32%\bitsadmin.exe /rawreturn /nowrap /transfer dlforgehtml /download /priority FOREGROUND "https://files.minecraftforge.net/maven/net/minecraftforge/forge/index_%MC_SERVER_MCVER%.html" "%~dp0forge-%MC_SERVER_MCVER%.html"  1>> "%~dp0logs\serverstart.log" 2>&1
 

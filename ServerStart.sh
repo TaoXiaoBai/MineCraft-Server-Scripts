@@ -328,10 +328,10 @@ while $run ; do
                 exit 1
             fi
             if [ "$(${MC_SERVER_JAVA} -version 2>&1 | awk -F '"' '/version/ {print $2}' | cut -c1-3)" = "1.8" ]; then
-                echo "DEBUG: Java 8 Found" >>logs/serverstart.log
+                echo "DEBUG: 已找到 Java 8" >>logs/serverstart.log
             else
-                echo "ERROR: Java 8 not found"
-                echo "ERROR: Java 8 not found" >>logs/serverstart.log
+                echo "ERROR: 没有找到 Java 8 "
+                echo "ERROR: 没有找到 Java 8" >>logs/serverstart.log
                 exit 1
             fi
         else
